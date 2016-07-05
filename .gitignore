@@ -6,3 +6,5 @@ NOTES.txt
 *.cpp
 *.hpp
 *.html
+
+.idea
