@@ -21,12 +21,13 @@ def show(output):
         # Bail gracefully if we don't have PIL
         print("Couldn't import Image or numpy:", str(err))
 
-@profile
+#@profile
 def calculate_z_serial_purepython(q, maxiter, z):
     """Pure python with complex datatype, iterating over list of q and z"""
     output = [0] * len(q)
     for i in range(len(q)):
         if i % 1000 == 0:
+            pass
             # print out some progress info since it is so slow...
             # print("%0.2f%% complete" % (1.0/len(q) * i * 100))
         zi = z[i]
