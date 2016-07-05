@@ -1,6 +1,6 @@
-"""Doesn't dereference on each iteration, goes faster!"""
 import sys
 import datetime
+import calculate_z
 
 # area of space to investigate
 x1, x2, y1, y2 = -2.13, 0.77, -1.3, 1.3
@@ -9,37 +9,18 @@ x1, x2, y1, y2 = -2.13, 0.77, -1.3, 1.3
 def show(output):
     """Convert list to numpy array, show using PIL"""
     try:
-        import Image
+        from PIL import Image
         # convert our output to PIL-compatible input
         import array
         output = ((o + (256*o) + (256**2)*o) * 8 for o in output)
         output = array.array('I', output)
         # display with PIL
-        im = Image.new("RGB", (w/2, h/2))
-        im.fromstring(output.tostring(), "raw", "RGBX", 0, -1)
+        im = Image.new("RGB", (w//2, h//2))
+        im.frombytes(output.tostring(), "raw", "RGBX", 0, -1)
         im.show()
     except ImportError as err:
         # Bail gracefully if we don't have PIL
-        print "Couldn't import Image or numpy:", str(err)
-
-
-def calculate_z_serial_purepython(q, maxiter, z):
-    """Pure python with complex datatype, iterating over list of q and z"""
-    output = [0] * len(q)
-    for i in range(len(q)):
-        zi = z[i]
-        qi = q[i]
-        if i % 1000 == 0:
-            # print out some progress info since it is so slow...
-            print "%0.2f%% complete" % (1.0/len(q) * i * 100)
-        for iteration in range(maxiter):
-            #z[i] = z[i]*z[i] + q[i]
-            zi = zi * zi + qi
-            #if abs(z[i]) > 2.0:
-            if abs(zi) > 2.0:
-                output[i] = iteration
-                break
-    return output
+        print("Couldn't import Image or numpy:", str(err))
 
 
 def calc_pure_python(show_output):
@@ -66,15 +47,15 @@ def calc_pure_python(show_output):
             q.append(complex(xcoord, ycoord))
 
     z = [0+0j] * len(q)
-    print "Total elements:", len(z)
+    print("Total elements:", len(z))
     start_time = datetime.datetime.now()
     output = calculate_z_serial_purepython(q, maxiter, z)
     end_time = datetime.datetime.now()
     secs = end_time - start_time
-    print "Main took", secs
+    print("Main took", secs)
 
     validation_sum = sum(output)
-    print "Total sum of elements (for validation):", validation_sum
+    print("Total sum of elements (for validation):", validation_sum)
 
     if show_output:
         show(output)
