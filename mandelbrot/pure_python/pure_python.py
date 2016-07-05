@@ -1,6 +1,6 @@
 import sys
 import datetime
-import calculate_z
+from calculate_z import calculate_z_serial_purepython
 
 # area of space to investigate
 x1, x2, y1, y2 = -2.13, 0.77, -1.3, 1.3
@@ -49,7 +49,7 @@ def calc_pure_python(show_output):
     z = [0+0j] * len(q)
     print("Total elements:", len(z))
     start_time = datetime.datetime.now()
-    output = calculate_z.calculate_z_serial_purepython(q, maxiter, z)
+    output = calculate_z_serial_purepython(q, maxiter, z)
     end_time = datetime.datetime.now()
     secs = end_time - start_time
     print("Main took", secs)
