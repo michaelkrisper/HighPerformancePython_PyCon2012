@@ -28,10 +28,12 @@ def calculate_z_serial_purepython(q, maxiter, z):
     for i in range(len(q)):
         if i % 1000 == 0:
             # print out some progress info since it is so slow...
-            print("%0.2f%% complete" % (1.0/len(q) * i * 100))
+            # print("%0.2f%% complete" % (1.0/len(q) * i * 100))
+        zi = z[i]
+        qi = q[i]
         for iteration in range(maxiter):
-            z[i] = z[i]*z[i] + q[i]
-            if abs(z[i]) > 2.0:
+            zi = zi**2 + qi
+            if abs(zi) > 2.0:
                 output[i] = iteration
                 break
     return output
