@@ -1,4 +1,4 @@
-def calculate_z(q, maxiter, z):
+def calculate_z_serial_purepython(q, maxiter, z):
     """Pure python with complex datatype, iterating over list of q and z"""
     output = [0] * len(q)
     for i in range(len(q)):
