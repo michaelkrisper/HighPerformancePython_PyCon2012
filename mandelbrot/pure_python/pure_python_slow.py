@@ -21,7 +21,7 @@ def show(output):
         # Bail gracefully if we don't have PIL
         print("Couldn't import Image or numpy:", str(err))
 
-
+@profile
 def calculate_z_serial_purepython(q, maxiter, z):
     """Pure python with complex datatype, iterating over list of q and z"""
     output = [0] * len(q)

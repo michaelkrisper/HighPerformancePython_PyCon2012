@@ -1,0 +1,23 @@
+Wrote profile results to pure_python_slow.py.lprof
+Timer unit: 1e-06 s
+
+Total time: 3.61492 s
+File: pure_python_slow.py
+Function: calculate_z_serial_purepython at line 24
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+    24                                           @profile
+    25                                           def calculate_z_serial_purepython(q, maxiter, z):
+    26                                               """Pure python with complex datatype, iterating over list of q and z"""
+    27         1          143    143.0      0.0      output = [0] * len(q)
+    28     22501        14648      0.7      0.4      for i in range(len(q)):
+    29     22500        19667      0.9      0.5          if i % 1000 == 0:
+    30                                                       # print out some progress info since it is so slow...
+    31        23          997     43.3      0.0              print("%0.2f%% complete" % (1.0/len(q) * i * 100))
+    32   1474430       911800      0.6     25.2          for iteration in range(maxiter):
+    33   1469878      1450441      1.0     40.1              z[i] = z[i]*z[i] + q[i]
+    34   1469878      1193859      0.8     33.0              if abs(z[i]) > 2.0:
+    35     17948        12468      0.7      0.3                  output[i] = iteration
+    36     17948        10897      0.6      0.3                  break
+    37         1            1      1.0      0.0      return output
