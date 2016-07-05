@@ -75,7 +75,7 @@ if __name__ == "__main__":
         maxiter = int(sys.argv[2])
 
     # we can show_output for Python, not for PyPy
-    validation_sum = calc_pure_python(True)
+    validation_sum = calc_pure_python(False)
 
     # confirm validation output for our known test case
     # we do this because we've seen some odd behaviour due to subtle student
